@@ -1,0 +1,111 @@
+$facebook: #3b5998;
+$white: white;
+$gris-soft-facebook:#e9ebee;
+$gris-dark-facebook:#5b5e65;
+$grid-spacing:3%;
+$min-heigth-1 : 1px;
+$padding-15: 15px;
+$relative : relative;
+$auto : auto;
+
+
+body,html{
+  margin: 0;
+  padding: 0;
+  background-color: $gris-soft-facebook;
+}
+
+%clearfix:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+.container {
+    position: $relative;
+    margin-left: $auto;
+    margin-right: $auto;
+    padding-right: $padding-15;
+    padding-left: $padding-15;
+}
+
+.row {
+    @extend %clearfix;
+
+    & + & {
+        margin-top:$grid-spacing;
+    }
+}
+
+[class*="col-"] {
+    float:left;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    position: relative;
+    min-height: $min-heigth-1;
+    padding-right: $padding-15;
+    padding-left: $padding-15;
+
+    &:last-child {
+        margin-right:0%;
+    }
+}
+
+$class: col !default;
+
+@for $i from 1 through 12{
+  .#{$class}-#{$i}{
+    width: ($i / 12) * 100%;
+    }
+  }
+
+@mixin size($width,$height,$minh){
+  width: $width;
+  height: $height;
+  min-height: $minh;
+}
+header{
+  background-color: $facebook;
+  @include size(auto,auto,43px);
+}
+section{
+  @include size(850px,auto,auto);
+  margin: 0 auto;
+  div.cover{
+    @include size(auto, 316px,auto);
+    position: relative;
+    background-image: url(../../dist/img/cover.jpg);
+    background-size: cover;
+    background-position: center;
+    .photo{
+      @include size(150px,200px,auto);
+      position: absolute;
+      top: 58%;
+      left: 2%;
+      img{
+        @include size(100%,150px,auto);
+        border: 6px solid $white;
+      }
+    }
+  }
+  div.white-bar{
+    @include size(auto,auto,43px);
+    background-color: $white;
+    margin-bottom: 3%;
+  }
+  div.post-and-info-body{
+    .col-6 > div{
+      height:316px;
+      background-color: $white;
+      border-radius: 2px;
+    }
+  }
+}
+/*UTILITIES*/
+.pl-0{
+  padding-left: 0;
+}
+.pr-0{
+  padding-right: 0;
+}
